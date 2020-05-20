@@ -1,0 +1,6 @@
+#!/bin/sh
+
+: "${VUSTED_NVIM:=nvim}"
+: "${VUSTED_HOME:=$(dirname "$(dirname "$(realpath "$0")")")}"
+
+"${VUSTED_NVIM}" --headless -u NONE -i NONE -n --cmd "source ${VUSTED_HOME}/main.vim" -- "$@"
