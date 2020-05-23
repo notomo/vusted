@@ -1,9 +1,10 @@
 
-let s:root = expand('<sfile>:h')
-
 function! s:main() abort
-    let &runtimepath = s:root .. ',' .. &runtimepath
     lua require 'vusted/run'{}
 endfunction
+
+let &runtimepath = getcwd() .. ',' .. &runtimepath
+let &runtimepath = expand('<sfile>:h') .. ',' .. &runtimepath
+runtime! plugin/**/*.vim
 
 call s:main()
