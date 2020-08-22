@@ -1,9 +1,9 @@
-return function ()
+return function()
   -- NOTICE: replace global arg
   arg = vim.fn.argv()
 
-  local run = require 'busted.runner'
-  local ok, result = pcall(run, { standalone=false, output='TAP' })
+  local run = require("busted.runner")
+  local ok, result = pcall(run, {standalone = false, output = "TAP"})
 
   local code = 0
   if not ok then
