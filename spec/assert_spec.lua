@@ -5,6 +5,10 @@ asserts.create("line"):register_eq(function(row)
   return vim.fn.getline(row or ".")
 end)
 
+asserts.create("position"):register_same(function()
+  return vim.fn.getpos(".")
+end)
+
 asserts.create("found"):register(function(self)
   return function(_, args)
     local pattern = args[1]
@@ -27,5 +31,10 @@ describe("vusted.assert", function()
 
     assert.line("foo")
     assert.line(2, "bar")
+  end)
+
+  it("can register custom assert for deep_equal", function()
+    local pos = vim.fn.getpos(".")
+    assert.position(pos)
   end)
 end)
