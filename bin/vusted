@@ -5,4 +5,4 @@
 "${VUSTED_NVIM}" --headless -u NONE -i NONE -n \
     --cmd "let &runtimepath = getcwd() .. ',' .. &runtimepath" \
     --cmd "let &runtimepath = fnamemodify(resolve('$0'), ':h:h') .. ',' .. &runtimepath" \
-    --cmd "call vusted#run()" -- "$@"
+    --cmd "call vusted#run()" --cmd "quitall!" -- "$@"
