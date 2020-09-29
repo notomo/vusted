@@ -1,7 +1,7 @@
 test:
 	vusted
+.PHONY: test
 
 list_test:
 	vusted -l
-
-.PHONY: test
+.PHONY: list_test
