@@ -2,6 +2,7 @@ test:
 	vusted
 .PHONY: test
 
-list_test:
-	vusted -l
-.PHONY: list_test
+TARGET_VERSION := x.x.x
+release:
+	LUAROCKS_API_KEY=${LUAROCKS_API_KEY} lua release.lua ${TARGET_VERSION}
+.PHONY: release

@@ -1,0 +1,3 @@
+*.rockspec
+*.src.rock
+!vusted.rockspec
