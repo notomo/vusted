@@ -1,5 +1,9 @@
 let s:this_path = expand('<sfile>')
-let &runtimepath = fnamemodify(s:this_path, ':h:h') .. ',' .. &runtimepath
+let s:root_path = fnamemodify(s:this_path, ':h:h')
+if isdirectory(s:root_path .. '/spec')
+    " HACK: for installation by clone
+    let &runtimepath = s:root_path .. ',' .. &runtimepath
+endif
 
 lua require('vusted/run')()
 

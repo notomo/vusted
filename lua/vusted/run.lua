@@ -2,6 +2,7 @@ return function()
   -- HACK: for wipe out "$@" arg buffer
   vim.api.nvim_command("silent! %bwipeout!")
 
+  -- for loading test target
   vim.o.runtimepath = vim.fn.getcwd() .. "," .. vim.o.runtimepath
   vim.api.nvim_command("runtime! plugin/**/*.vim")
 
