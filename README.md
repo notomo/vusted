@@ -1,14 +1,11 @@
-an experimental `busted` wrapper for testing neovim plugin
+`busted` wrapper for testing neovim plugin
 
 ## Requirements
-- busted
 - neovim
 
 ## Installation
 
-```
-export PATH=$PATH:path/to/vusted/bin
-```
+`luarocks install vusted`
 
 ## Usage
 
