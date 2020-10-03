@@ -5,7 +5,15 @@ if isdirectory(s:root_path .. '/spec')
     let &runtimepath = s:root_path .. ',' .. &runtimepath
 endif
 
-lua require('vusted/run')()
+try
+    lua require('vusted/run')()
+catch
+    $ put =v:throwpoint
+    $ put =v:exception
+    1delete _
+    %print
+    cquit
+endtry
 
 " NOTE: A verbose output will change as the following.
 "
