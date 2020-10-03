@@ -1,9 +1,9 @@
 package = "vusted"
-version = "{EDIT_VERSION}-1"
-source = {url = "git+https://github.com/notomo/vusted.git", tag = "v{EDIT_VERSION}"}
+version = "x.x.x-1"
+source = {url = "git+https://github.com/notomo/vusted.git", tag = "vx.x.x"}
 description = {
   summary = "`busted` wrapper for testing neovim plugin",
-  detailed = [[]],
+  detailed = "",
   homepage = "https://github.com/notomo/vusted",
   license = "MIT <http://opensource.org/licenses/MIT>",
 }

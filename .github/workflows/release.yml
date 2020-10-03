@@ -1,0 +1,21 @@
+name: release
+on:
+ push:
+   tags:
+     - "v*"
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: notomo/action-setup-nvim-lua@v1
+        id: setup
+
+      - run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\/v/}
+        id: var
+
+      - run: make release TARGET_VERSION=${{ steps.var.outputs.version }}
+        env:
+          LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
