@@ -7,7 +7,7 @@ return function()
   vim.api.nvim_command("runtime! plugin/**/*.vim")
 
   -- NOTICE: replace global arg
-  arg = vim.fn.argv()
+  arg = vim.fn.argv() -- luacheck: ignore
 
   local run = require("busted.runner")
   local ok, result = pcall(run, {standalone = false, output = "TAP"})

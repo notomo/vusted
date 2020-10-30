@@ -18,6 +18,6 @@ endtry
 " NOTE: A verbose output will change as the following.
 "
 " - `source {file.vim}`
-"   Last set from ~/path/to/entry.vim line \d
+"   Last set from ~/path/to/vusted_entry.vim line \d
 " - `lua {file.lua}`
 "   Last set from --cmd argument
