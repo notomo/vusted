@@ -15,6 +15,6 @@ jobs:
       - run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\/v/}
         id: var
 
-      - run: make release TARGET_VERSION=${{ steps.var.outputs.version }}
+      - run: make release VERSION=${{ steps.var.outputs.version }}
         env:
           LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}

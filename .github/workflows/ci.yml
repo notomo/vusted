@@ -23,7 +23,7 @@ jobs:
       - uses: notomo/action-setup-nvim-lua@v1
         id: setup
 
-      - run: make try TARGET_VERSION=0.0.0
+      - run: make new_rockspec VERSION=0.0.0
 
       - uses: rhysd/action-setup-vim@v1
         id: vim
