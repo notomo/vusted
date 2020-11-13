@@ -8,21 +8,16 @@ test:
 	${VUSTED}
 .PHONY: test
 
-TARGET_VERSION := x.x.x
-TARGET_FILE := rockspec/vusted-${TARGET_VERSION}-1.rockspec
+VERSION :=
+ROCKSPEC_FILE := rockspec/vusted-${VERSION}-1.rockspec
 
-try:
-	$(MAKE) new_rockspec
-.PHONY: try
-
-release:
-	$(MAKE) new_rockspec
+release: new_rockspec
 	luarocks install dkjson
-	luarocks upload ${TARGET_FILE} --temp-key=${LUAROCKS_API_KEY}
+	luarocks upload ${ROCKSPEC_FILE} --temp-key=${LUAROCKS_API_KEY}
 .PHONY: release
 
 new_rockspec:
-	luarocks new_version rockspec/vusted-x.x.x-1.rockspec --dir rockspec --tag=v${TARGET_VERSION}
-	cat ${TARGET_FILE}
-	luarocks make ${TARGET_FILE}
+	luarocks new_version rockspec/vusted-x.x.x-1.rockspec --dir rockspec --tag=v${VERSION}
+	cat ${ROCKSPEC_FILE}
+	luarocks make ${ROCKSPEC_FILE}
 .PHONY: new_rockspec

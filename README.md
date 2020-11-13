@@ -1,4 +1,4 @@
-`busted` wrapper for testing neovim plugin
+[busted](https://github.com/Olivine-Labs/busted) wrapper for testing neovim plugin
 
 ## Requirements
 - neovim
