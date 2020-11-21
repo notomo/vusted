@@ -1,7 +1,8 @@
 #!/bin/sh
 
 : "${VUSTED_NVIM:=nvim}"
+: "${VUSTED_ARGS:=--headless -u NONE -i NONE -n}"
 
-"${VUSTED_NVIM}" --headless -u NONE -i NONE -n \
+"${VUSTED_NVIM}" ${VUSTED_ARGS} \
     --cmd "execute 'source ' .. fnamemodify(resolve('$0'), ':h') .. '/vusted_entry.vim'" \
     -- "$@"
