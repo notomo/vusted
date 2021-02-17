@@ -6,7 +6,10 @@ if isdirectory(s:root_path .. '/spec')
 endif
 
 try
-    lua require('vusted/run')()
+lua <<EOF
+    package.path = package.path .. ';' .. vim.fn.trim(vim.fn.system('luarocks config deploy_lua_dir')) .. '/?.lua'
+    require('vusted/run')()
+EOF
 catch
     $ put =v:throwpoint
     $ put =v:exception
