@@ -17,6 +17,7 @@ build = {
    type = "builtin",
    modules = {
       ["vusted.assert"] = "lua/vusted/assert.lua",
+      ["vusted.helper"] = "lua/vusted/helper.lua",
       ["vusted.run"] = "lua/vusted/run.lua"
    },
    install = {

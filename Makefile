@@ -21,3 +21,7 @@ new_rockspec:
 	cat ${ROCKSPEC_FILE}
 	luarocks make ${ROCKSPEC_FILE}
 .PHONY: new_rockspec
+
+install:
+	luarocks make
+.PHONY: install
