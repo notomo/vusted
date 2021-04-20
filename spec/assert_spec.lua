@@ -1,5 +1,4 @@
-local vassert = require("vusted.assert")
-local asserts = vassert.asserts
+local asserts = require("vusted.assert").asserts
 
 asserts.create("line"):register_eq(function(row)
   return vim.fn.getline(row or ".")

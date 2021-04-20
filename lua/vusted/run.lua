@@ -1,16 +1,16 @@
 return function()
   -- HACK: for wipe out "$@" arg buffer
-  vim.api.nvim_command("silent! %bwipeout!")
+  vim.cmd("silent! %bwipeout!")
 
   -- for loading test target
   vim.o.runtimepath = vim.fn.getcwd() .. "," .. vim.o.runtimepath
-  vim.api.nvim_command("runtime! plugin/**/*.vim")
+  vim.cmd("runtime! plugin/*.vim")
 
   -- NOTICE: replace global arg
   arg = vim.fn.argv() -- luacheck: ignore
 
-  local run = require("busted.runner")
-  local ok, result = pcall(run, {standalone = false, output = "TAP"})
+  local runner = require("busted.runner")
+  local ok, result = pcall(runner, {standalone = false, output = "TAP"})
 
   local code = 0
   if not ok then

@@ -3,31 +3,33 @@ local say = require("say")
 
 local M = {}
 
-local asserts = {}
-asserts.__index = asserts
+local Assert = {}
+Assert.__index = Assert
+M.asserts = Assert
 
-function asserts.create(name)
-  local assert_fn = {
+function Assert.create(name)
+  vim.validate({name = {name, "string"}})
+  local tbl = {
     name = name,
     positive = ("assertion.%s.positive"):format(name),
     negative = ("assertion.%s.negative"):format(name),
   }
-  return setmetatable(assert_fn, asserts)
+  return setmetatable(tbl, Assert)
 end
 
-function asserts.set_positive(self, msg)
+function Assert.set_positive(self, msg)
   say:set(self.positive, msg)
 end
 
-function asserts.set_negative(self, msg)
+function Assert.set_negative(self, msg)
   say:set(self.negative, msg)
 end
 
-function asserts.register(self, fn)
+function Assert.register(self, fn)
   assert:register("assertion", self.name, fn(self), self.positive, self.negative)
 end
 
-function asserts.register_eq(self, get_actual)
+function Assert.register_eq(self, get_actual)
   local fn = function(_, args)
     local expected = args[#args]
     local actual = get_actual(unpack(args, 1, #args - 1))
@@ -44,7 +46,7 @@ function asserts.register_eq(self, get_actual)
   end)
 end
 
-function asserts.register_same(self, get_actual)
+function Assert.register_same(self, get_actual)
   local fn = function(_, args)
     local expected = vim.inspect(args[#args])
     local actual = vim.inspect(get_actual(unpack(args, 1, #args - 1)))
@@ -60,8 +62,5 @@ function asserts.register_same(self, get_actual)
     return fn
   end)
 end
-
-M.asserts = asserts
-M.assert = assert
 
 return M
