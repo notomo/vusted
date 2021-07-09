@@ -10,7 +10,7 @@ return function()
   arg = vim.fn.argv() -- luacheck: ignore
 
   local runner = require("busted.runner")
-  local ok, result = pcall(runner, {standalone = false, output = "TAP"})
+  local ok, result = pcall(runner, {standalone = false, output = arg.output or "vusted.default"})
 
   local code = 0
   if not ok then
@@ -19,3 +19,4 @@ return function()
   end
   os.exit(code)
 end
+

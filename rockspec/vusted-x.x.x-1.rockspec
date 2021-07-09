@@ -16,6 +16,7 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
+      ["busted.outputHandlers.vusted.default"] = "lua/busted/outputHandlers/vusted/default.lua",
       ["vusted.assert"] = "lua/vusted/assert.lua",
       ["vusted.helper"] = "lua/vusted/helper.lua",
       ["vusted.run"] = "lua/vusted/run.lua"
