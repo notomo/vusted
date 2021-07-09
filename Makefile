@@ -5,7 +5,7 @@ else
 endif
 
 test:
-	${VUSTED}
+	${VUSTED} --shuffle
 .PHONY: test
 
 VERSION :=
@@ -25,3 +25,7 @@ new_rockspec:
 install:
 	luarocks make
 .PHONY: install
+
+_init:
+	luarocks write_rockspec --lua-versions=5.1
+.PHONY: _init
