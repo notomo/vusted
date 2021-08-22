@@ -4,7 +4,6 @@ return function()
 
   -- for loading test target
   vim.o.runtimepath = vim.fn.getcwd() .. "," .. vim.o.runtimepath
-  vim.cmd("runtime! plugin/*.vim")
 
   -- NOTICE: replace global arg
   arg = vim.fn.argv() -- luacheck: ignore
@@ -19,4 +18,3 @@ return function()
   end
   os.exit(code)
 end
-
