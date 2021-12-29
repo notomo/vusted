@@ -7,7 +7,7 @@ endif
 
 try
 lua <<EOF
-    local version = _VERSION.sub(5)
+    local version = _VERSION:sub(5)
     local deploy_lua_dir = vim.fn.trim(vim.fn.system('luarocks --lua-version=' .. version .. ' config deploy_lua_dir'))
     local deploy_lib_dir = vim.fn.trim(vim.fn.system('luarocks --lua-version=' .. version .. ' config deploy_lib_dir'))
     package.path = package.path .. ';' .. deploy_lua_dir .. '/?.lua;' .. deploy_lua_dir .. '/?/init.lua'
