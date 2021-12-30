@@ -5,7 +5,7 @@
 
 ## Installation
 
-`luarocks install vusted`
+`luarocks --lua-version=5.1 install vusted`
 
 ## Usage
 

@@ -23,7 +23,7 @@ new_rockspec:
 .PHONY: new_rockspec
 
 install:
-	luarocks make
+	luarocks --lua-version=5.1 make
 .PHONY: install
 
 _init:
