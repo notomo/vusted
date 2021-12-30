@@ -21,7 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: notomo/action-setup-nvim-lua@v1
-        id: setup
+        with:
+          luarocks-version: '3.5.0' # workaround for windows
 
       - run: make new_rockspec VERSION=0.0.0
 
