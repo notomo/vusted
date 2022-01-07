@@ -9,7 +9,7 @@ return function(options)
     end
     return nil, true
   end
-  busted.subscribe({"suite", "start"}, suiteStart)
+  busted.subscribe({ "suite", "start" }, suiteStart)
 
   return handler
 end
