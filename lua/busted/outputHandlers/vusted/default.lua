@@ -26,6 +26,34 @@ return function(options)
     end
   end
 
+  local show_slows = function(tests)
+    local threshold = os.getenv("VUSTED_SLOW_MS")
+    if not threshold then
+      return
+    end
+    threshold = tonumber(threshold)
+
+    local slows = {}
+    for _, t in ipairs(tests) do
+      local ms = t.element.duration * 1000
+      if ms >= threshold then
+        table.insert(slows, { duration = ms, path = test_path(t) })
+      end
+    end
+    if #slows == 0 then
+      return
+    end
+
+    table.sort(slows, function(a, b)
+      return a.duration > b.duration
+    end)
+
+    io.write(("# Slow: %d (threshold: %.2f ms)\n"):format(#slows, threshold))
+    for _, slow in ipairs(slows) do
+      io.write(("#   %s (%.2f ms)\n"):format(slow.path, slow.duration))
+    end
+  end
+
   local suite_end = function()
     io.write("\n\n")
 
@@ -45,6 +73,8 @@ return function(options)
       io.write(("# Error: %d\n"):format(#handler.errors))
       show_test_paths(handler.errors)
     end
+
+    show_slows(handler.successes)
 
     return nil, true
   end
