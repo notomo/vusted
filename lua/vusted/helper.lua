@@ -1,5 +1,7 @@
 local M = {}
 
+--- Cleanup lua package.loaded for plugin.
+--- @param plugin_name string: lua module name (`lua/{plugin_name}/*.lua`)
 function M.cleanup_loaded_modules(plugin_name)
   vim.validate({ plugin_name = { plugin_name, "string" } })
 
@@ -22,6 +24,9 @@ else
   end
 end
 
+--- Returns plugin root directory full path.
+--- @param plugin_name string: lua module name (`lua/{plugin_name}/*.lua`)
+--- @return string: plugin root directory full path
 function M.find_plugin_root(plugin_name)
   vim.validate({ plugin_name = { plugin_name, "string" } })
 
@@ -33,6 +38,10 @@ function M.find_plugin_root(plugin_name)
   return vim.split(_adjust_sep(file), "/lua/", true)[1], nil
 end
 
+--- Returns table to call require on every access.
+--- For example, `mod.execute()` equivalents to `require("mod").execute()`.
+--- @param name string: lua module name
+--- @return table: to access the module.
 function M.require(name)
   vim.validate({ name = { name, "string" } })
   return setmetatable({}, {
