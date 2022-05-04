@@ -13,6 +13,115 @@ function M.cleanup_loaded_modules(plugin_name)
   end
 end
 
+local clears = {
+  buffer = function()
+    vim.cmd("tabedit")
+    vim.cmd("tabonly!")
+    vim.cmd("silent! %bwipeout!")
+  end,
+  message = function()
+    vim.cmd("messages clear")
+  end,
+  abbreviation = function()
+    vim.cmd("abclear")
+  end,
+  highlight = function()
+    vim.cmd("highlight clear")
+  end,
+  jump = function()
+    vim.cmd("clearjumps")
+  end,
+  history = function()
+    vim.fn.histdel("cmd")
+    vim.fn.histdel("search")
+    vim.fn.histdel("expr")
+    vim.fn.histdel("input")
+    vim.fn.histdel("debug")
+  end,
+  command = function()
+    vim.cmd("comclear")
+  end,
+  keymap = function()
+    vim.cmd("mapclear")
+    vim.cmd("mapclear!")
+    vim.cmd("tmapclear")
+    vim.cmd("lmapclear")
+  end,
+  autocmd = function()
+    local groups = vim.split(vim.api.nvim_exec("augroup", true), "%s+", { trimempty = true })
+    for _, group in ipairs(groups) do
+      vim.api.nvim_del_augroup_by_name(group)
+    end
+    vim.api.nvim_clear_autocmds({})
+  end,
+  option = function(opts)
+    local options = vim.tbl_filter(function(o)
+      return o.was_set and not vim.tbl_contains(opts.exclude, o.name)
+    end, vim.api.nvim_get_all_options_info())
+    for _, opt in ipairs(options) do
+      vim.opt[opt.name] = opt.default
+    end
+  end,
+}
+
+local default_targets = {
+  buffer = { enabled = true },
+  message = { enabled = true },
+  abbreviation = { enabled = true },
+  highlight = { enabled = true },
+  jump = { enabled = true },
+  history = { enabled = true },
+  command = { enabled = true },
+  keymap = { enabled = true },
+  autocmd = { enabled = true },
+  option = {
+    enabled = true,
+    opts = {
+      exclude = { "runtimepath" },
+    },
+  },
+}
+
+--- Cleanup the following state. (best effort)
+---   - buffer
+---   - message
+---   - abbreviation
+---   - highlight
+---   - jump
+---   - history
+---   - command (NOTICE: include |nvim-defaults|)
+---   - keymap (NOTICE: include |default-mappings|)
+---   - autocmd, augroup (NOTICE: include |default-autocmds|)
+---   - option (exclude 'runtimepath')
+--- Not supported:
+---   - user defined function
+---   - `:filetype on`
+---   - `:syntax on`
+---   - variable (g:, v:)
+---   - register
+--- @param targets table|nil: see above `default_targets`
+---   - For example if disable 'autocmd' cleanup: `helper.cleanup({autocmd = {enabled = false}})`
+function M.cleanup(targets)
+  targets = vim.tbl_deep_extend("force", default_targets, targets or {})
+  for _, name in ipairs({
+    "buffer",
+    "message",
+    "abbreviation",
+    "highlight",
+    "jump",
+    "history",
+    "command",
+    "keymap",
+    "autocmd",
+    "option",
+  }) do
+    local target = targets[name]
+    if target.enabled then
+      clears[name](target.opts)
+    end
+  end
+end
+
 local _adjust_sep
 if vim.fn.has("win32") == 1 then
   _adjust_sep = function(path)
