@@ -1,3 +1,5 @@
+# vusted
+
 [busted](https://github.com/Olivine-Labs/busted) wrapper for testing neovim plugin
 
 ## Requirements
@@ -30,5 +32,5 @@ See [vusted.helper](https://github.com/notomo/vusted/blob/master/lua/vusted/help
     - vusted uses this arguments to execute neovim.
     - default: `--headless --clean`
 - `VUSTED_SLOW`
-    - For example if you set 1000, add summary of the tests that elapsed 1000ms or more.
-    - This can use only if the output handler is `vusted.default`.
+    - For example if you set 1000, output handler adds summary about the tests that elapsed 1000ms or more.
+    - can use only if the output handler is `vusted.default`.
