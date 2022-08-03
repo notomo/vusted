@@ -46,7 +46,7 @@ describe("vusted.helper", function()
 
   describe("cleanup()", function()
     it("removes buffers", function()
-      vim.cmd([[tabedit]])
+      vim.cmd.tabedit()
 
       require("vusted.helper").cleanup()
 
@@ -62,9 +62,9 @@ describe("vusted.helper", function()
     end)
 
     it("removes abbreviations", function()
-      vim.cmd([[noreabbrev 1 test1]])
-      vim.cmd([[inoreabbrev 2 test2]])
-      vim.cmd([[cnoreabbrev 3 test3]])
+      vim.cmd.noreabbrev({ "1", "test1" })
+      vim.cmd.inoreabbrev({ "2", "test2" })
+      vim.cmd.cnoreabbrev({ "3", "test3" })
 
       require("vusted.helper").cleanup()
 
@@ -86,7 +86,7 @@ No abbreviation found]],
     end)
 
     it("removes jumps", function()
-      vim.cmd([[tabedit]])
+      vim.cmd.tabedit()
 
       require("vusted.helper").cleanup()
 
