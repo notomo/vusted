@@ -33,3 +33,6 @@ jobs:
       - run: make test
         env:
           VUSTED_NVIM: ${{ steps.vim.outputs.executable }}
+
+      - run: luarocks --lua-version=5.1 install vusted
+      - run: vusted --version
