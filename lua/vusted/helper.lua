@@ -144,7 +144,7 @@ function M.find_plugin_root(plugin_name)
   if file == nil then
     error("plugin root is not found by pattern: " .. root_pattern)
   end
-  return vim.split(_adjust_sep(file), "/lua/", true)[1], nil
+  return vim.split(_adjust_sep(file), "/lua/", true)[1]
 end
 
 --- Returns table to call require on every access.
