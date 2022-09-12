@@ -8,6 +8,13 @@ return function()
   -- NOTICE: replace global arg
   arg = vim.fn.argv() -- luacheck: ignore
 
+  if vim.tbl_contains(arg, "--version") then
+    local version = _VERSION:sub(5)
+    local package_version = vim.fn.system("luarocks --lua-version=" .. version .. " show vusted --mversion")
+    print(package_version)
+    os.exit(0)
+  end
+
   local runner = require("busted.runner")
   local ok, result = pcall(runner, { standalone = false, output = arg.output or "vusted.default" })
 
