@@ -169,4 +169,27 @@ No abbreviation found]],
       assert.is_false(vim.o.autoread)
     end)
   end)
+
+  describe("get_module_root", function()
+    for _, c in ipairs({
+      {
+        module_name = "root",
+        expected = "root",
+      },
+      {
+        module_name = "root.a.b",
+        expected = "root",
+      },
+      {
+        module_name = "root/a/b",
+        expected = "root",
+      },
+    }) do
+      local name = ([[("%s") == "%s"]]):format(c.module_name, c.expected)
+      it(name, function()
+        local actual = require("vusted.helper").get_module_root(c.module_name)
+        assert.is_same(c.expected, actual)
+      end)
+    end
+  end)
 end)

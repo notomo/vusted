@@ -160,4 +160,13 @@ function M.require(name)
   })
 end
 
+--- Returns root module name.
+--- For example, `get_required_root("plugin_name.module1")` returns `plugin_name`.
+--- @param module_name string: lua module name
+--- @return string: root module name
+function M.get_module_root(module_name)
+  vim.validate({ module_name = { module_name, "string" } })
+  return vim.split(module_name:gsub("%.", "/"), "/", true)[1]
+end
+
 return M
