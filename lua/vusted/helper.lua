@@ -144,7 +144,7 @@ function M.find_plugin_root(plugin_name)
   if file == nil then
     error("plugin root is not found by pattern: " .. root_pattern)
   end
-  return vim.split(_adjust_sep(file), "/lua/", true)[1]
+  return vim.split(_adjust_sep(file), "/lua/", { plain = true })[1]
 end
 
 --- Returns table to call require on every access.
@@ -166,7 +166,7 @@ end
 --- @return string: root module name
 function M.get_module_root(module_name)
   vim.validate({ module_name = { module_name, "string" } })
-  return vim.split(module_name:gsub("%.", "/"), "/", true)[1]
+  return vim.split(module_name:gsub("%.", "/"), "/", { plain = true })[1]
 end
 
 return M
