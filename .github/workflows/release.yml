@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: notomo/action-setup-nvim-lua@v1
 
-      - run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\/v/}
+      - run: echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
         id: var
 
       - run: make release VERSION=${{ steps.var.outputs.version }}
