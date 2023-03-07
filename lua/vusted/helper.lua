@@ -135,7 +135,7 @@ end
 
 --- Returns plugin root directory full path.
 --- @param plugin_name string: lua module name (`lua/{plugin_name}/*.lua`)
---- @return string: plugin root directory full path
+--- @return string # plugin root directory full path
 function M.find_plugin_root(plugin_name)
   vim.validate({ plugin_name = { plugin_name, "string" } })
 
@@ -150,7 +150,7 @@ end
 --- Returns table to call require on every access.
 --- For example, `mod.execute()` equivalents to `require("mod").execute()`.
 --- @param name string: lua module name
---- @return table: to access the module.
+--- @return any # to access the module.
 function M.require(name)
   vim.validate({ name = { name, "string" } })
   return setmetatable({}, {
@@ -163,7 +163,7 @@ end
 --- Returns root module name.
 --- For example, `get_required_root("plugin_name.module1")` returns `plugin_name`.
 --- @param module_name string: lua module name
---- @return string: root module name
+--- @return string # root module name
 function M.get_module_root(module_name)
   vim.validate({ module_name = { module_name, "string" } })
   return vim.split(module_name:gsub("%.", "/"), "/", { plain = true })[1]
