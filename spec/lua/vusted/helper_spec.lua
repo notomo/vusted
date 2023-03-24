@@ -81,8 +81,8 @@ No abbreviation found]],
 
       require("vusted.helper").cleanup()
 
-      local hl = vim.api.nvim_get_hl_by_name("VustedTestHighlight", false)
-      assert.is_nil(hl.foreground)
+      local hl = vim.api.nvim_get_hl(0, { name = "VustedTestHighlight" })
+      assert.is_nil(hl.fg)
     end)
 
     it("removes jumps", function()
