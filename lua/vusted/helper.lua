@@ -48,7 +48,13 @@ local clears = {
     vim.cmd("lmapclear")
   end,
   autocmd = function()
-    local groups = vim.split(vim.api.nvim_exec("augroup", true), "%s+", { trimempty = true })
+    local exec = function(cmd)
+      if vim.api.nvim_exec2 then
+        return vim.api.nvim_exec2(cmd, { output = true }).output
+      end
+      return vim.api.nvim_exec(cmd, true)
+    end
+    local groups = vim.split(exec("augroup"), "%s+", { trimempty = true })
     for _, group in ipairs(groups) do
       vim.api.nvim_del_augroup_by_name(group)
     end
