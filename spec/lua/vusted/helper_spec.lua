@@ -58,7 +58,7 @@ describe("vusted.helper", function()
 
       require("vusted.helper").cleanup()
 
-      assert.equal("", vim.api.nvim_exec("messages", true))
+      assert.equal("", vim.api.nvim_exec2("messages", { output = true }).output)
     end)
 
     it("removes abbreviations", function()
@@ -72,7 +72,7 @@ describe("vusted.helper", function()
         [[
 
 No abbreviation found]],
-        vim.api.nvim_exec("abbreviate", true)
+        vim.api.nvim_exec2("abbreviate", { output = true }).output
       )
     end)
 
@@ -112,7 +112,10 @@ No abbreviation found]],
 
       require("vusted.helper").cleanup()
 
-      assert.same([[No user-defined commands found]], vim.api.nvim_exec("command VustedTestCommand", true))
+      assert.same(
+        [[No user-defined commands found]],
+        vim.api.nvim_exec2("command VustedTestCommand", { output = true }).output
+      )
     end)
 
     it("removes keymaps", function()
