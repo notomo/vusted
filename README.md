@@ -38,3 +38,6 @@ See [vusted.helper](https://github.com/notomo/vusted/blob/master/lua/vusted/help
 - `VUSTED_SLOW`
     - For example if you set 1000, output handler adds summary about the tests that elapsed 1000ms or more.
     - can use only if the output handler is `vusted.default`.
+- `VUSTED_USE_LOCAL`
+    - Set this flag to true or 1 if vusted was installed locally, e.g., with `luarocks install --local vusted`.
+    - default: nil
