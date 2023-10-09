@@ -63,4 +63,8 @@ function Assert.register_same(self, get_actual)
   end)
 end
 
+function M.register(name, fn)
+  Assert.create(name):register(fn)
+end
+
 return M
