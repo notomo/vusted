@@ -13,8 +13,8 @@ return function(options)
 
   local test_path = function(t)
     local trace = t.element.trace
-    if not trace then
-      return ""
+    if not (trace and trace.source) then
+      return nil
     end
     local source = trace.source:gsub("^@", "")
     return ("%s:%d : %s"):format(source, trace.currentline, t.name)
@@ -22,7 +22,10 @@ return function(options)
 
   local show_test_paths = function(tests)
     for _, test in ipairs(tests) do
-      io.write(("#   %s\n"):format(test_path(test)))
+      local path = test_path(test)
+      if path then
+        io.write(("#   %s\n"):format(path))
+      end
     end
   end
 
