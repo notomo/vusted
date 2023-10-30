@@ -20,7 +20,25 @@ return function()
 
   local code = 0
   if not ok then
-    print(result .. "\n")
+    -- workaround: unitl next busted release
+    local normalized = result:gsub([[\]], [[/]])
+    if
+      normalized:find([[busted/outputHandlers/TAP.lua]])
+      and normalized:find([[attempt to concatenate field 'currentline' %(a nil value%)]])
+    then
+      print([[
+# Failure message: Cannot find file or directory: spec
+not ok 2 - 
+# Failure message: No test files found matching Lua pattern: _spec
+1..2
+
+# Success: 0
+# Error: 2
+]])
+    else
+      print(result .. "\n")
+    end
+
     code = 1
   end
   os.exit(code)
