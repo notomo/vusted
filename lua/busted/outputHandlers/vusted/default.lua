@@ -30,11 +30,11 @@ return function(options)
   end
 
   local show_slows = function(tests)
-    local threshold = os.getenv("VUSTED_SLOW_MS")
-    if not threshold then
+    local env_threshold = os.getenv("VUSTED_SLOW_MS")
+    if not env_threshold then
       return
     end
-    threshold = tonumber(threshold)
+    local threshold = tonumber(env_threshold)
 
     local slows = {}
     for _, t in ipairs(tests) do
