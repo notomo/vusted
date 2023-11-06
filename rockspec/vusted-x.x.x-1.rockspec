@@ -11,7 +11,7 @@ description = {
    license = "MIT <http://opensource.org/licenses/MIT>"
 }
 dependencies = {
-   "busted >= 2.0.0"
+   "busted >= 2.2.0"
 }
 build = {
    type = "builtin",
