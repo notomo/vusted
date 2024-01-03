@@ -11,6 +11,7 @@ description = {
   license = "MIT <http://opensource.org/licenses/MIT>",
 }
 dependencies = {
+  "luasystem = 0.2.1", -- Workaround for https://github.com/notomo/vusted/issues/17
   "busted >= 2.2.0",
 }
 build = {
