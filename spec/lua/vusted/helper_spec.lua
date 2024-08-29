@@ -175,6 +175,14 @@ No abbreviation found]],
       assert.is_false(vim.o.cursorline)
     end)
 
+    it("removes arglist", function()
+      vim.cmd.argadd("test")
+
+      require("vusted.helper").cleanup()
+
+      assert.same({}, vim.fn.argv())
+    end)
+
     it("can disable specific target", function()
       vim.keymap.set("n", "F", [[echo]])
       vim.opt.autoread = false

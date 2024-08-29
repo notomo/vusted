@@ -73,6 +73,9 @@ local clears = {
       vim.opt[opt.name] = opt.default
     end
   end,
+  arglist = function()
+    vim.cmd("%argdelete")
+  end,
 }
 
 local default_targets = {
@@ -91,6 +94,7 @@ local default_targets = {
       exclude = { "runtimepath" },
     },
   },
+  arglist = { enabled = true },
 }
 
 --- Cleanup the following state. (best effort)
@@ -104,6 +108,7 @@ local default_targets = {
 ---   - keymap (NOTICE: include |default-mappings|)
 ---   - autocmd, augroup (NOTICE: include |default-autocmds|)
 ---   - option (exclude 'runtimepath')
+---   - arglist
 --- Not supported:
 ---   - user defined function
 ---   - `:filetype on`
@@ -130,6 +135,7 @@ function M.cleanup(targets)
     "keymap",
     "autocmd",
     "option",
+    "arglist",
   }) do
     local target = targets[name]
     if target.enabled then

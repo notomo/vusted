@@ -7,6 +7,7 @@ return function()
 
   -- NOTICE: replace global arg
   arg = vim.fn.argv() -- luacheck: ignore
+  vim.cmd("%argdelete")
 
   if vim.tbl_contains(arg, "--version") then
     local version = _VERSION:sub(5)
