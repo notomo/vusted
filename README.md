@@ -41,3 +41,10 @@ See [vusted.helper](https://github.com/notomo/vusted/blob/master/lua/vusted/help
 - `VUSTED_USE_LOCAL`
     - Set this flag to true or 1 if vusted was installed locally, e.g., with `luarocks install --local vusted`.
     - default: nil
+- `VUSTED_DISABLE_EXIT`
+    - vusted does not exit if `VUSTED_DISABLE_EXIT` exists. Use to check neovim state interactively after test execution.
+    - example: `VUSTED_DISABLE_EXIT=1 VUSTED_DISABLE_CLEANUP=1 VUSTED_ARGS=--clean vusted --filter 'vusted can print'`
+    - default: nil
+- `VUSTED_DISABLE_CLEANUP`
+    - `vusted.helper.cleanup()` and `vusted.helper.cleanup_loaded_modules()` do nothing if `VUSTED_DISABLE_CLEANUP` exists.
+    - default: nil

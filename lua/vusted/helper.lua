@@ -1,8 +1,13 @@
 local M = {}
 
 --- Cleanup lua package.loaded for plugin.
+--- This does nothing If VUSTED_DISABLE_CLEANUP environment variable exists.
 --- @param plugin_name string: lua module name (`lua/{plugin_name}/*.lua`)
 function M.cleanup_loaded_modules(plugin_name)
+  if vim.env.VUSTED_DISABLE_CLEANUP then
+    return
+  end
+
   vim.validate({ plugin_name = { plugin_name, "string" } })
 
   local dir = plugin_name:gsub("/", ".") .. "."
@@ -105,9 +110,14 @@ local default_targets = {
 ---   - `:syntax on`
 ---   - variable (g:, v:)
 ---   - register
+--- This does nothing If VUSTED_DISABLE_CLEANUP environment variable exists.
 --- @param targets table|nil: see above `default_targets`
 ---   - For example if disable 'autocmd' cleanup: `helper.cleanup({autocmd = {enabled = false}})`
 function M.cleanup(targets)
+  if vim.env.VUSTED_DISABLE_CLEANUP then
+    return
+  end
+
   targets = vim.tbl_deep_extend("force", default_targets, targets or {})
   for _, name in ipairs({
     "buffer",

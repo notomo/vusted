@@ -2,10 +2,15 @@ return function(options)
   local busted = require("busted")
   local handler = require("busted.outputHandlers.TAP")(options)
 
+  local write = io.write
+  if not vim.tbl_contains(vim.fn.argv(), "--headless") then
+    write = print
+  end
+
   local suite_start = function(suite)
     if suite.randomseed then
       -- NOTE: can know random seed even if neovim crashes
-      io.write(("# Random seed: %s\n"):format(suite.randomseed))
+      write(("# Random seed: %s\n"):format(suite.randomseed))
     end
     return nil, true
   end
@@ -24,7 +29,7 @@ return function(options)
     for _, test in ipairs(tests) do
       local path = test_path(test)
       if path then
-        io.write(("#   %s\n"):format(path))
+        write(("#   %s\n"):format(path))
       end
     end
   end
@@ -51,29 +56,29 @@ return function(options)
       return a.duration > b.duration
     end)
 
-    io.write(("# Slow: %d (threshold: %.2f ms)\n"):format(#slows, threshold))
+    write(("# Slow: %d (threshold: %.2f ms)\n"):format(#slows, threshold))
     for _, slow in ipairs(slows) do
-      io.write(("#   %s (%.2f ms)\n"):format(slow.path, slow.duration))
+      write(("#   %s (%.2f ms)\n"):format(slow.path, slow.duration))
     end
   end
 
   local suite_end = function()
-    io.write("\n\n")
+    write("\n\n")
 
-    io.write(("# Success: %d\n"):format(#handler.successes))
+    write(("# Success: %d\n"):format(#handler.successes))
 
     if #handler.failures > 0 then
-      io.write(("# Failure: %d\n"):format(#handler.failures))
+      write(("# Failure: %d\n"):format(#handler.failures))
       show_test_paths(handler.failures)
     end
 
     if #handler.pendings > 0 then
-      io.write(("# Pending: %d\n"):format(#handler.pendings))
+      write(("# Pending: %d\n"):format(#handler.pendings))
       show_test_paths(handler.pendings)
     end
 
     if #handler.errors > 0 then
-      io.write(("# Error: %d\n"):format(#handler.errors))
+      write(("# Error: %d\n"):format(#handler.errors))
       show_test_paths(handler.errors)
     end
 

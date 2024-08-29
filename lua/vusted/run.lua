@@ -15,6 +15,12 @@ return function()
     os.exit(0)
   end
 
+  local exit = os.exit
+  if vim.env.VUSTED_DISABLE_EXIT then
+    exit = function() end
+    require("busted.compatibility").exit = exit -- HACK
+  end
+
   local runner = require("busted.runner")
   local ok, result = pcall(runner, { standalone = false, output = "vusted.default" })
 
@@ -23,5 +29,5 @@ return function()
     print(result .. "\n")
     code = 1
   end
-  os.exit(code)
+  exit(code)
 end

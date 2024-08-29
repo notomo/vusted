@@ -1,4 +1,8 @@
 describe("vusted.helper", function()
+  before_each(function()
+    vim.env.VUSTED_DISABLE_CLEANUP = nil
+  end)
+
   describe("cleanup_loaded_modules()", function()
     it("cleanups plugin's loaded modules", function()
       package.loaded["vusted_test"] = {}
@@ -10,6 +14,15 @@ describe("vusted.helper", function()
       assert.is_nil(package.loaded["vusted_test"])
       assert.is_nil(package.loaded["vusted_test.test1"])
       assert.is_nil(package.loaded["vusted_test/test2"])
+    end)
+
+    it("does nothing when VUSTED_DISABLE_CLEANUP exists", function()
+      package.loaded["vusted_test"] = {}
+      vim.env.VUSTED_DISABLE_CLEANUP = 1
+
+      require("vusted.helper").cleanup_loaded_modules("vusted_test")
+
+      assert.no.is_nil(package.loaded["vusted_test"])
     end)
   end)
 
@@ -194,5 +207,14 @@ No abbreviation found]],
         assert.is_same(c.expected, actual)
       end)
     end
+  end)
+
+  it("does nothing when VUSTED_DISABLE_CLEANUP exists", function()
+    vim.cmd.tabedit()
+
+    vim.env.VUSTED_DISABLE_CLEANUP = 1
+    require("vusted.helper").cleanup()
+
+    assert.equal(2, #vim.api.nvim_list_bufs())
   end)
 end)
