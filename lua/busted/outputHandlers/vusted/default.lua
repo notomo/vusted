@@ -2,10 +2,8 @@ return function(options)
   local busted = require("busted")
   local handler = require("busted.outputHandlers.TAP")(options)
 
+  -- avoid using print not to affect message history.
   local write = io.write
-  if not vim.tbl_contains(vim.fn.argv(), "--headless") then
-    write = print
-  end
 
   local suite_start = function(suite)
     if suite.randomseed then
