@@ -18,6 +18,9 @@ asserts.create("found"):register(function(self)
   end
 end)
 
+local assert = assert
+---@cast assert +{found:fun(want), line:fun(row,want), position:fun(want)}
+
 describe("vusted.assert", function()
   it("can register full custom assert", function()
     vim.fn.setline(1, "hoge")

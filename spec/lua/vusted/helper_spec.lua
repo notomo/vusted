@@ -1,3 +1,7 @@
+local assert = assert
+---@cast assert +{is_nil:fun(x), equal:fun(want,got), is_false:fun(x), is_true:fun(x), same:fun(want,got), match:fun(want,got)}
+---@cast assert +{no:{is_nil:fun(x)}}
+
 describe("vusted.helper", function()
   before_each(function()
     vim.env.VUSTED_DISABLE_CLEANUP = nil
@@ -53,7 +57,7 @@ describe("vusted.helper", function()
       end)
 
       assert.is_false(ok)
-      assert.matches("module 'vusted_test_require' not found:", result)
+      assert.match("module 'vusted_test_require' not found:", result)
     end)
   end)
 
@@ -212,7 +216,7 @@ No abbreviation found]],
       local name = ([[("%s") == "%s"]]):format(c.module_name, c.expected)
       it(name, function()
         local actual = require("vusted.helper").get_module_root(c.module_name)
-        assert.is_same(c.expected, actual)
+        assert.same(c.expected, actual)
       end)
     end
   end)
