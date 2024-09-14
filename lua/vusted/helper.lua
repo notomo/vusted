@@ -4,7 +4,7 @@ local M = {}
 --- This does nothing If VUSTED_DISABLE_CLEANUP environment variable exists.
 --- @param plugin_name string: lua module name (`lua/{plugin_name}/*.lua`)
 function M.cleanup_loaded_modules(plugin_name)
-  if vim.env.VUSTED_DISABLE_CLEANUP then
+  if os.getenv("VUSTED_DISABLE_CLEANUP") then
     return
   end
 
@@ -119,7 +119,7 @@ local default_targets = {
 --- @param targets table|nil: see above `default_targets`
 ---   - For example if disable 'autocmd' cleanup: `helper.cleanup({autocmd = {enabled = false}})`
 function M.cleanup(targets)
-  if vim.env.VUSTED_DISABLE_CLEANUP then
+  if os.getenv("VUSTED_DISABLE_CLEANUP") then
     return
   end
 

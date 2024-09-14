@@ -9,7 +9,7 @@ try
 lua <<EOF
     local version = _VERSION:sub(5)
     local luarocks_cmd = 'luarocks --lua-version=' .. version
-    if vim.env.VUSTED_USE_LOCAL then
+    if os.getenv("VUSTED_USE_LOCAL") then
         luarocks_cmd = luarocks_cmd .. ' --local'
     end
     local deploy_lua_dir = vim.fn.trim(vim.fn.system(luarocks_cmd .. ' config deploy_lua_dir'))

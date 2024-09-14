@@ -17,7 +17,7 @@ return function()
   end
 
   local exit = os.exit
-  if vim.env.VUSTED_DISABLE_EXIT then
+  if os.getenv("VUSTED_DISABLE_EXIT") then
     exit = function() end
     require("busted.compatibility").exit = exit -- HACK
   end
