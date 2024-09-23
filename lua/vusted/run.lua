@@ -5,8 +5,11 @@ return function()
   -- for loading test target
   vim.o.runtimepath = vim.fn.getcwd() .. "," .. vim.o.runtimepath
 
+  local argv = vim.fn.argv()
+  ---@cast argv string[]
+
   -- NOTICE: replace global arg
-  arg = vim.fn.argv() -- luacheck: ignore
+  arg = argv
   vim.cmd("%argdelete")
 
   if vim.tbl_contains(arg, "--version") then

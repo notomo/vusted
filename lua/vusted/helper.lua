@@ -57,6 +57,7 @@ local clears = {
       if vim.api.nvim_exec2 then
         return vim.api.nvim_exec2(cmd, { output = true }).output
       end
+      ---@diagnostic disable-next-line: deprecated
       return vim.api.nvim_exec(cmd, true)
     end
     local groups = vim.split(exec("augroup"), "%s+", { trimempty = true })
