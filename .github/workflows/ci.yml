@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: notomo/action-setup-nvim-lua@v1
+      - uses: notomo/action-setup-nvim-lua@v2
 
       - run: make new_rockspec VERSION=0.0.0
 
