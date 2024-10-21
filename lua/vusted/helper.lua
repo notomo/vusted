@@ -8,8 +8,6 @@ function M.cleanup_loaded_modules(plugin_name)
     return
   end
 
-  vim.validate({ plugin_name = { plugin_name, "string" } })
-
   local dir = plugin_name:gsub("/", ".") .. "."
   for key in pairs(package.loaded) do
     if vim.startswith(key:gsub("/", "."), dir) or key == plugin_name then
@@ -160,8 +158,6 @@ end
 --- @param plugin_name string: lua module name (`lua/{plugin_name}/*.lua`)
 --- @return string # plugin root directory full path
 function M.find_plugin_root(plugin_name)
-  vim.validate({ plugin_name = { plugin_name, "string" } })
-
   local root_pattern = ("lua/%s/*.lua"):format(plugin_name)
   local file = vim.api.nvim_get_runtime_file(root_pattern, false)[1]
   if file == nil then
@@ -175,7 +171,6 @@ end
 --- @param name string: lua module name
 --- @return any # to access the module.
 function M.require(name)
-  vim.validate({ name = { name, "string" } })
   return setmetatable({}, {
     __index = function(_, k)
       return require(name)[k]
@@ -188,7 +183,6 @@ end
 --- @param module_name string: lua module name
 --- @return string # root module name
 function M.get_module_root(module_name)
-  vim.validate({ module_name = { module_name, "string" } })
   return vim.split(module_name:gsub("%.", "/"), "/", { plain = true })[1]
 end
 

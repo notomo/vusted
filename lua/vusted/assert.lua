@@ -8,7 +8,6 @@ Assert.__index = Assert
 M.asserts = Assert
 
 function Assert.create(name)
-  vim.validate({ name = { name, "string" } })
   local tbl = {
     name = name,
     positive = ("assertion.%s.positive"):format(name),
