@@ -19,18 +19,19 @@ return function()
     os.exit(0)
   end
 
-  local exit = os.exit
-  if os.getenv("VUSTED_DISABLE_EXIT") then
-    exit = function() end
-    require("busted.compatibility").exit = exit -- HACK
-  end
-
   if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
     require("lldebugger").start()
   end
 
   local runner = require("busted.runner")
   local ok, result = pcall(runner, { standalone = false, output = "vusted.default" })
+
+  -- NOTICE: place after calling busted.runner to use patched os.exit when using --coverage
+  local exit = os.exit
+  if os.getenv("VUSTED_DISABLE_EXIT") then
+    exit = function() end
+    require("busted.compatibility").exit = exit -- HACK
+  end
 
   local code = 0
   if not ok then
