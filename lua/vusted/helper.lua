@@ -158,7 +158,7 @@ end
 --- @param plugin_name string: lua module name (`lua/{plugin_name}/*.lua`)
 --- @return string # plugin root directory full path
 function M.find_plugin_root(plugin_name)
-  local root_pattern = ("lua/%s/*.lua"):format(plugin_name)
+  local root_pattern = ("lua/%s/*"):format(plugin_name)
   local file = vim.api.nvim_get_runtime_file(root_pattern, false)[1]
   if file == nil then
     error("plugin root is not found by pattern: " .. root_pattern)
