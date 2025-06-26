@@ -1,4 +1,4 @@
-let s:this_path = expand('<sfile>')
+let s:this_path = expand('<script>')
 let s:root_path = fnamemodify(s:this_path, ':h:h')
 if isdirectory(s:root_path .. '/spec')
     " HACK: for installation by clone
