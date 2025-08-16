@@ -19,7 +19,7 @@ jobs:
         os: [ubuntu-latest, macos-latest, macos-15, windows-latest]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: notomo/action-setup-nvim-lua@v2
 
       - run: make new_rockspec VERSION=0.0.0
