@@ -9,8 +9,8 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: notomo/action-setup-nvim-lua@v2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: notomo/action-setup-nvim-lua@0314b24446fbad4f9cf1c2129f10fe7cd869f431 # v2.0.2
 
       - run: echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
         id: var
