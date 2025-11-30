@@ -8,6 +8,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    environment: release
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - uses: notomo/action-setup-nvim-lua@0314b24446fbad4f9cf1c2129f10fe7cd869f431 # v2.0.2
