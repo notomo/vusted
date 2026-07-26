@@ -1,5 +1,14 @@
 # vusted
 
+> [!WARNING]
+> **This project is no longer maintained.**
+> No further updates, bug fixes or releases are planned.
+> The repository and the luarocks module are kept available so that existing users are not broken, but please consider migrating to one of the alternatives below.
+>
+> - [notomo/ntf](https://github.com/notomo/ntf)
+> - [mini-test](https://nvim-mini.org/mini.nvim/readmes/mini-test)
+> - [lewis6991/nvim-test](https://github.com/lewis6991/nvim-test)
+
 [busted](https://github.com/lunarmodules/busted) wrapper for testing neovim plugin
 
 ## Requirements
