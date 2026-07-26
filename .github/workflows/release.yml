@@ -14,7 +14,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: notomo/action-setup-nvim-lua@0314b24446fbad4f9cf1c2129f10fe7cd869f431 # v2.0.2
+      - uses: notomo/action-setup-nvim-lua@6c94bbed869c0fe8cb1d40348a27d12105ff7162 # v2.0.4
 
       - run: echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
         id: var
